@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:graphql_demo/Models/mutations/user_data_model.dart';
 import 'package:graphql_demo/Mutations_example/mutations_query.dart';
 import 'package:graphql_demo/utils.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
@@ -98,13 +99,13 @@ class _MutationsDemoState extends State<MutationsDemo> {
                   CreateUserResModel model =
                       CreateUserResModel.fromJson(json.decode(Utils.getPrettyJSONString(resultData)));
 
-                  setState(() {
-                    name = model.createUser?.name ?? '';
-                    username = model.createUser?.username ?? '';
-                    email = model.createUser?.email ?? '';
-                  });
-
-                  print(resultData);
+                  setState(
+                    () {
+                      name = model.createUser?.name ?? '';
+                      username = model.createUser?.username ?? '';
+                      email = model.createUser?.email ?? '';
+                    },
+                  );
                 },
               ),
               builder: (runMutation, result) {
@@ -113,7 +114,6 @@ class _MutationsDemoState extends State<MutationsDemo> {
                   children: [
                     ElevatedButton(
                       onPressed: () {
-                        print("on press");
                         runMutation({
                           'input': {
                             'name': nameController.text,
@@ -122,7 +122,7 @@ class _MutationsDemoState extends State<MutationsDemo> {
                           }
                         });
                       },
-                      child: Text('Add'),
+                      child: const Text('Add'),
                     ),
                     ElevatedButton(
                       onPressed: () {
@@ -136,7 +136,7 @@ class _MutationsDemoState extends State<MutationsDemo> {
                           email = '';
                         });
                       },
-                      child: Text('Clear'),
+                      child: const Text('Clear'),
                     ),
                   ],
                 );
@@ -156,55 +156,5 @@ class _MutationsDemoState extends State<MutationsDemo> {
         ),
       ),
     );
-  }
-}
-class CreateUserResModel {
-  String? sTypename;
-  CreateUser? createUser;
-
-  CreateUserResModel({this.sTypename, this.createUser});
-
-  CreateUserResModel.fromJson(Map<String, dynamic> json) {
-    sTypename = json['__typename'];
-    createUser = json['createUser'] != null
-        ? new CreateUser.fromJson(json['createUser'])
-        : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['__typename'] = this.sTypename;
-    if (this.createUser != null) {
-      data['createUser'] = this.createUser!.toJson();
-    }
-    return data;
-  }
-}
-
-class CreateUser {
-  String? sTypename;
-  String? email;
-  String? id;
-  String? name;
-  String? username;
-
-  CreateUser({this.sTypename, this.email, this.id, this.name, this.username});
-
-  CreateUser.fromJson(Map<String, dynamic> json) {
-    sTypename = json['__typename'];
-    email = json['email'];
-    id = json['id'];
-    name = json['name'];
-    username = json['username'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['__typename'] = this.sTypename;
-    data['email'] = this.email;
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['username'] = this.username;
-    return data;
   }
 }

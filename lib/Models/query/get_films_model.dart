@@ -6,14 +6,14 @@ class FilmsDetailModel {
 
   FilmsDetailModel.fromJson(Map<String, dynamic> json) {
     sTypename = json['__typename'];
-    allFilms = json['allFilms'] != null ? new AllFilms.fromJson(json['allFilms']) : null;
+    allFilms = json['allFilms'] != null ? AllFilms.fromJson(json['allFilms']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['__typename'] = this.sTypename;
-    if (this.allFilms != null) {
-      data['allFilms'] = this.allFilms!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['__typename'] = sTypename;
+    if (allFilms != null) {
+      data['allFilms'] = allFilms!.toJson();
     }
     return data;
   }
@@ -30,16 +30,16 @@ class AllFilms {
     if (json['films'] != null) {
       films = <Films>[];
       json['films'].forEach((v) {
-        films!.add(new Films.fromJson(v));
+        films!.add(Films.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['__typename'] = this.sTypename;
-    if (this.films != null) {
-      data['films'] = this.films!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['__typename'] = sTypename;
+    if (films != null) {
+      data['films'] = films!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -60,17 +60,17 @@ class Films {
     director = json['director'];
     releaseDate = json['releaseDate'];
     speciesConnection =
-        json['speciesConnection'] != null ? new SpeciesConnection.fromJson(json['speciesConnection']) : null;
+        json['speciesConnection'] != null ? SpeciesConnection.fromJson(json['speciesConnection']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['__typename'] = this.sTypename;
-    data['title'] = this.title;
-    data['director'] = this.director;
-    data['releaseDate'] = this.releaseDate;
-    if (this.speciesConnection != null) {
-      data['speciesConnection'] = this.speciesConnection!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['__typename'] = sTypename;
+    data['title'] = title;
+    data['director'] = director;
+    data['releaseDate'] = releaseDate;
+    if (speciesConnection != null) {
+      data['speciesConnection'] = speciesConnection!.toJson();
     }
     return data;
   }
@@ -87,16 +87,16 @@ class SpeciesConnection {
     if (json['species'] != null) {
       species = <Species>[];
       json['species'].forEach((v) {
-        species!.add(new Species.fromJson(v));
+        species!.add(Species.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['__typename'] = this.sTypename;
-    if (this.species != null) {
-      data['species'] = this.species!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['__typename'] = sTypename;
+    if (species != null) {
+      data['species'] = species!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -116,10 +116,10 @@ class Species {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['__typename'] = this.sTypename;
-    data['eyeColors'] = this.eyeColors;
-    data['name'] = this.name;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['__typename'] = sTypename;
+    data['eyeColors'] = eyeColors;
+    data['name'] = name;
     return data;
   }
 }

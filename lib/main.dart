@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:graphql_demo/Models/query/get_continents_res_model.dart';
+import 'package:graphql_demo/Models/query/get_films_model.dart';
 import 'package:graphql_demo/Mutations_example/mutations_client.dart';
 import 'package:graphql_demo/Mutations_example/user_data.dart';
 import 'package:graphql_demo/Query_example/graphql_client.dart';
